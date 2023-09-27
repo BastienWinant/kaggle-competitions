@@ -3,8 +3,7 @@ import unittest
 import os
 import pandas as pd
 
-# check the existence of data files
-# and reads into pandas dataframes
+# test the existence of data files and reads into pandas dataframes
 class DatasetImportTestCase(unittest.TestCase):
     def setUp(self):
         self.dataset = Dataset()
@@ -41,11 +40,28 @@ class DatasetImportTestCase(unittest.TestCase):
         self.assertIsInstance(prompts_df, pd.DataFrame)
         self.assertIsInstance(summaries_df, pd.DataFrame)
 
+# test the validity of the import data files
 class DatasetCleanTestCase(unittest.TestCase):
-    def setUp():
+    def setUp(self):
         self.dataset = Dataset()
         
-    # def test_merge_columns():
+    def test_train_merge_columns(self):
+        prompts_df, summaries_df = self.dataset.load_data()
+
+        prompts_df_columns = prompts_df.columns
+        summaries_df_columns = summaries_df.columns
+        merge_candidates = prompts_df_columns.intersection(summaries_df_columns)
+        
+        self.assertGreater(len(merge_candidates), 0)
+
+    def test_test_merge_columns(self):
+        prompts_df, summaries_df = self.dataset.load_data(training=True)
+
+        prompts_df_columns = prompts_df.columns
+        summaries_df_columns = summaries_df.columns
+        merge_candidates = prompts_df_columns.intersection(summaries_df_columns)
+        
+        self.assertGreater(len(merge_candidates), 0)
         
         
 def DatasetImportTestSuite():
@@ -58,6 +74,8 @@ def DatasetImportTestSuite():
 
 def DatasetCleanTestSuite():
     suite = unittest.TestSuite()
+    suite.addTest(DatasetCleanTestCase('test_train_merge_columns'))
+    suite.addTest(DatasetCleanTestCase('test_test_merge_columns'))
     return suite
     
 if __name__ == "__main__":
