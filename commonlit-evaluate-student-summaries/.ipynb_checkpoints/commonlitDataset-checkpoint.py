@@ -10,10 +10,17 @@ class Dataset:
         self.test_summaries_file = "./data/summaries_test.csv"
 
     def load_data(self, training=True):
+        prompts_df = None
+        summaries_df = None
+        
         if training:
-            self.train_prompts = pd.read_csv(self.train_prompts_file)
-            self.train_summaries = pd.read_csv(self.train_summaries_file)
+            prompts_df = pd.read_csv(self.train_prompts_file)
+            summaries_df = pd.read_csv(self.train_summaries_file)
         else:
-            self.test_prompts = pd.read_csv(self.test_prompts_file)
-            self.test_summaries = pd.read_csv(self.test_summaries_file)
-        # self.train_prompts = pd.read_csv(train_prompts_file)
+            prompts_df = pd.read_csv(self.test_prompts_file)
+            summaries_df = pd.read_csv(self.test_summaries_file)
+
+        return prompts_df, summaries_df
+        
+    def merge_data(self, training=True):
+        pass

@@ -29,24 +29,26 @@ class DatasetImportTestCase(unittest.TestCase):
 
     # test train data read into dataframes
     def test_train_data_read(self):
-        self.dataset.load_data()
-        self.assertIsInstance(self.dataset.train_prompts, pd.DataFrame)
-        self.assertIsInstance(self.dataset.train_summaries, pd.DataFrame)
+        prompts_df, summaries_df = self.dataset.load_data()
+        
+        self.assertIsInstance(prompts_df, pd.DataFrame)
+        self.assertIsInstance(summaries_df, pd.DataFrame)
 
     # test test data read into dataframes
     def test_test_data_read(self):
-        self.dataset.load_data(training=False)
-        self.assertIsInstance(self.dataset.test_prompts, pd.DataFrame)
-        self.assertIsInstance(self.dataset.test_summaries, pd.DataFrame)
+        prompts_df, summaries_df = self.dataset.load_data(training=False)
+        
+        self.assertIsInstance(prompts_df, pd.DataFrame)
+        self.assertIsInstance(summaries_df, pd.DataFrame)
 
-def DatasetCleaningTestCase(unittest.TestCase):
+class DatasetCleanTestCase(unittest.TestCase):
     def setUp():
         self.dataset = Dataset()
         
-    def test_merge_columns():
-        pass
+    # def test_merge_columns():
         
-def DataImportTestSuite():
+        
+def DatasetImportTestSuite():
     suite = unittest.TestSuite()
     suite.addTest(DatasetImportTestCase('test_datatype'))
     suite.addTest(DatasetImportTestCase('test_filepath_attributes'))
@@ -54,10 +56,11 @@ def DataImportTestSuite():
     suite.addTest(DatasetImportTestCase('test_train_data_read'))
     return suite
 
-def DataCleanTestSuite():
+def DatasetCleanTestSuite():
     suite = unittest.TestSuite()
     return suite
     
 if __name__ == "__main__":
     runner = unittest.TextTestRunner()
-    runner.run(DataImportTestSuite())
+    runner.run(DatasetImportTestSuite())
+    runner.run(DatasetCleanTestSuite())
