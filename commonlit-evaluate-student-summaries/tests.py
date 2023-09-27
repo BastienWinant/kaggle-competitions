@@ -39,15 +39,25 @@ class DatasetImportTestCase(unittest.TestCase):
         self.assertIsInstance(self.dataset.test_prompts, pd.DataFrame)
         self.assertIsInstance(self.dataset.test_summaries, pd.DataFrame)
 
-
-def suite():
+def DatasetCleaningTestCase(unittest.TestCase):
+    def setUp():
+        self.dataset = Dataset()
+        
+    def test_merge_columns():
+        pass
+        
+def DataImportTestSuite():
     suite = unittest.TestSuite()
     suite.addTest(DatasetImportTestCase('test_datatype'))
     suite.addTest(DatasetImportTestCase('test_filepath_attributes'))
     suite.addTest(DatasetImportTestCase('test_filepath_existence'))
     suite.addTest(DatasetImportTestCase('test_train_data_read'))
     return suite
+
+def DataCleanTestSuite():
+    suite = unittest.TestSuite()
+    return suite
     
 if __name__ == "__main__":
     runner = unittest.TextTestRunner()
-    runner.run(suite())
+    runner.run(DataImportTestSuite())
