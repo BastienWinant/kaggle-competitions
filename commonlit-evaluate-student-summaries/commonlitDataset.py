@@ -21,6 +21,6 @@ class Dataset:
             summaries_df = pd.read_csv(self.test_summaries_file)
 
         return prompts_df, summaries_df
-        
-    # def merge_data(self, training=True):
-    #     prompt_da
+    
+    def merge_data(self, prompts_df; summaries_df):
+        return prompts_df.merge(summaries_df)
