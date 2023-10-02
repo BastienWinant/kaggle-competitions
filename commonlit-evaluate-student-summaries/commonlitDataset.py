@@ -23,4 +23,8 @@ class Dataset:
         return prompts_df, summaries_df
     
     def merge_data(self, prompts_df, summaries_df):
-        return prompts_df.merge(summaries_df)
+        prompts_df_columns = prompts_df.columns
+        summaries_df_columns = summaries_df.columns
+        merge_candidates = prompts_df_columns.intersection(summaries_df_columns)
+        
+        return prompts_df.merge(summaries_df, how="inner", on=merge_candidates)
