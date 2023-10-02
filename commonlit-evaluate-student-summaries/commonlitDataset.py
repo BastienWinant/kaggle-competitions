@@ -22,5 +22,5 @@ class Dataset:
 
         return prompts_df, summaries_df
     
-    def merge_data(self, prompts_df; summaries_df):
+    def merge_data(self, prompts_df, summaries_df):
         return prompts_df.merge(summaries_df)
