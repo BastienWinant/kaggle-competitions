@@ -86,6 +86,7 @@ class DatasetCleanTestCase(unittest.TestCase):
         df = self.dataset.merge_data(prompts_df, summaries_df)
         
         self.assertIsInstance(df, pd.DataFrame)
+        self.assertGreater(df.shape[0], 0)
         
         
         
