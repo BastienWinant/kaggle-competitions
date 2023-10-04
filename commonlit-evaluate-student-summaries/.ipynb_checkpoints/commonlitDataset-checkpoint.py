@@ -21,6 +21,10 @@ class Dataset:
             summaries_df = pd.read_csv(self.test_summaries_file)
 
         return prompts_df, summaries_df
+    
+    def merge_data(self, prompts_df, summaries_df):
+        prompts_df_columns = prompts_df.columns
+        summaries_df_columns = summaries_df.columns
+        merge_candidates = list(prompts_df_columns.intersection(summaries_df_columns))
         
-    # def merge_data(self, training=True):
-    #     prompt_da
+        return prompts_df.merge(summaries_df, how="inner", on=merge_candidates)
