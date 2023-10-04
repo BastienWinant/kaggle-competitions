@@ -80,6 +80,12 @@ class DatasetCleanTestCase(unittest.TestCase):
         df = self.dataset.merge_data(prompts_df, summaries_df)
         
         self.assertIsInstance(df, pd.DataFrame)
+
+    def test_test_merge(self):
+        prompts_df, summaries_df = self.dataset.load_data(training=True)
+        df = self.dataset.merge_data(prompts_df, summaries_df)
+        
+        self.assertIsInstance(df, pd.DataFrame)
         
         
         
@@ -97,6 +103,7 @@ def DatasetCleanTestSuite():
     suite.addTest(DatasetCleanTestCase('test_train_merge_columns'))
     suite.addTest(DatasetCleanTestCase('test_test_merge_columns'))
     suite.addTest(DatasetCleanTestCase('test_train_merge'))
+    suite.addTest(DatasetCleanTestCase('test_test_merge'))
     return suite
     
 if __name__ == "__main__":

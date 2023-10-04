@@ -74,6 +74,19 @@ class DatasetCleanTestCase(unittest.TestCase):
         for column in merge_candidates:
             self.assertEqual(prompts_df[column].isna().sum(), 0)
             self.assertEqual(summaries_df[column].isna().sum(), 0)
+            
+    def test_train_merge(self):
+        prompts_df, summaries_df = self.dataset.load_data(training=False)
+        df = self.dataset.merge_data(prompts_df, summaries_df)
+        
+        self.assertIsInstance(df, pd.DataFrame)
+
+    def test_test_merge(self):
+        prompts_df, summaries_df = self.dataset.load_data(training=True)
+        df = self.dataset.merge_data(prompts_df, summaries_df)
+        
+        self.assertIsInstance(df, pd.DataFrame)
+        
         
         
 def DatasetImportTestSuite():
@@ -89,6 +102,8 @@ def DatasetCleanTestSuite():
     suite = unittest.TestSuite()
     suite.addTest(DatasetCleanTestCase('test_train_merge_columns'))
     suite.addTest(DatasetCleanTestCase('test_test_merge_columns'))
+    suite.addTest(DatasetCleanTestCase('test_train_merge'))
+    suite.addTest(DatasetCleanTestCase('test_test_merge'))
     return suite
     
 if __name__ == "__main__":
