@@ -87,8 +87,13 @@ class DatasetCleanTestCase(unittest.TestCase):
         
         self.assertIsInstance(df, pd.DataFrame)
         self.assertGreater(df.shape[0], 0)
+
+class DatasetTransformTestCase(unittest.TestCase):
+    def setUp(self):
+        self.dataset = Dataset()
         
-        
+    def test_drop_stopwords(self):
+        self.assertIsInstance(self)
         
 def DatasetImportTestSuite():
     suite = unittest.TestSuite()

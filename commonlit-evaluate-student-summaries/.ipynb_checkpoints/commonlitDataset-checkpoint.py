@@ -1,5 +1,7 @@
 import numpy as np
 import pandas as pd
+import nltk
+from nltk.corpus import stopwords
 
 class Dataset:
     def __init__(self):
@@ -28,3 +30,13 @@ class Dataset:
         merge_candidates = list(prompts_df_columns.intersection(summaries_df_columns))
         
         return prompts_df.merge(summaries_df, how="inner", on=merge_candidates)
+
+    def strip_stopwords(self):
+        nltk.download('stopwords')
+        return stopwords.words("english")
+
+    def etl_pipeline(self, training=True):
+        prompts_df, summaries_df = self.load_data(training)
+        df = merge_data(prompts_df, summaries_df)
+        
+        return df
