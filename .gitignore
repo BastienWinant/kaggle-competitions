@@ -1,2 +1,5 @@
-env/
-*/data/
+renv*
+.R*
+*.Rproj
+.env
+*/data
