@@ -3,3 +3,4 @@ renv*
 *.Rproj
 .env
 */data
+.Rproj.user
