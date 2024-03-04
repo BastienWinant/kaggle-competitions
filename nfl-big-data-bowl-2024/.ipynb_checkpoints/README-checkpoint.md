@@ -1,2 +1,0 @@
-# NFL BIG DATA BOWL 2024
-## 
